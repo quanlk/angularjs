@@ -2,9 +2,16 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
     <title>HELLO</title>
   </head>
-  <body>
-    <h1>hello</h1>
+  <body ng-app="NameCalculator">
+    <h1>My first AngularJS</h1>
+    <div ng-controller="NameCalculatorController">
+      <input type="text" ng-model="name" ng-keyup="displayNumeric();"/>
+      {{name}}
+      <div>Total value is: {{totalValue}}</div>
+    </div>
   </body>
 </html>
