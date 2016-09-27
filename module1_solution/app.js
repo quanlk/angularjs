@@ -19,7 +19,7 @@
         var counter = 0;
 
         for (var i = 0; i < splitedMenu.length; i++) {
-          if (splitedMenu[i].length > 0) {
+          if (splitedMenu[i].trim().length > 0) {
             counter++;
           }
         }
