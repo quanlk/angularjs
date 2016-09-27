@@ -1,21 +1,53 @@
 (function () {
   'use strict';
 
-  angular.module('DIApp', [])
-  .controller('DIController', DIController);
+  angular.module('LunchCheck', [])
+  .controller('LunchCheckController', LunchCheckController);
 
-  DIController.$inject = ['$scope', '$filter'];
-  function DIController($scope, $filter) {
-    $scope.name = "Quan";
-    $scope.imageIndex = "1";
+  LunchCheckController.$inject = ['$scope'];
+  function LunchCheckController($scope) {
+    $scope.lunchMenu = "";
+    $scope.message = "";
+    $scope.messageStyle = {};
 
-    $scope.upper = function() {
-      var upCase = $filter('uppercase');
-      $scope.name = upCase($scope.name);
+    $scope.onClickCheckIfTooMuch = function() {
+      if ($scope.lunchMenu.length == 0) {
+        $scope.message = "Please enter data first";
+        $scope.messageStyle = getRedStyle();
+      } else {
+        var splitedMenu = $scope.lunchMenu.split(',');
+        var counter = 0;
+
+        for (var i = 0; i < splitedMenu.length; i++) {
+          if (splitedMenu[i].length > 0) {
+            counter++;
+          }
+        }
+
+        if (counter <= 3) {
+          $scope.message = "Enjoy!";
+        } else {
+          $scope.message = "Too much!";
+        }
+
+        $scope.messageStyle = getGreenStyle();
+      }
     };
 
-    $scope.click = function() {
-      $scope.imageIndex = "2";
-    };
+    function getGreenStyle() {
+      return {
+        "color":"green",
+        "border-style": "dashed",
+        "border-color":"green"
+      };
+    }
+
+    function getRedStyle() {
+      return {
+        "color":"red",
+        "border-style": "dashed",
+        "border-color":"red"
+      };
+    }
   }
 })();
